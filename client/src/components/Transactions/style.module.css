@@ -1,0 +1,38 @@
+.negativo {
+  background: #ff6b6b;
+}
+
+.positivo {
+  background: #48dbfb;
+}
+
+.transaction {
+  display: flex;
+  margin: 10px;
+}
+
+.day {
+  font-weight: bold;
+  align-self: center;
+  padding-right: 10px;
+  min-width: 2rem;
+}
+
+.info {
+  flex: 1;
+}
+
+.value {
+  align-self: center;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.buttons {
+    align-self: center;
+}
+
+.buttons > * {
+    margin-left: 10px;
+    cursor: pointer;
+}
