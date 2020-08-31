@@ -11,7 +11,8 @@ export default function ModalForm({
   const [type, setType] = React.useState(transaction.type);
   const [sendTransaction, setSendTransaction] = React.useState(transaction);
 
-  const title = (modalType === 'edit') ? "Edição de lançamento" : "Inclusão de lançamento"
+  const title =
+    modalType === "edit" ? "Edição de lançamento" : "Inclusão de lançamento";
 
   const handleTypeChange = (event) => {
     if (modalType === "edit") {
@@ -58,7 +59,6 @@ export default function ModalForm({
     event.preventDefault();
     handleTransaction(sendTransaction);
     closeModal();
-    
   };
 
   return (
@@ -114,19 +114,23 @@ export default function ModalForm({
           onChange={handleCategoryChange}
         />
         <label htmlFor="value">{"Valor"}</label>
-        <input
-          type="number"
-          id="value"
-          min="0"
-          defaultValue={transaction.value}
-          onChange={handleValueChange}
-        />
-        <input
-          type="date"
-          id="date"
-          defaultValue={transaction.yearMonthDay}
-          onChange={handleDateChange}
-        />
+        <div className={css.lastLine}>
+          <input
+            type="number"
+            id="value"
+            min="0"
+            className={css.value}
+            defaultValue={transaction.value}
+            onChange={handleValueChange}
+          />
+          <input
+            type="date"
+            id="date"
+            className={css.date}
+            defaultValue={transaction.yearMonthDay}
+            onChange={handleDateChange}
+          />
+        </div>
         <input
           className="waves-effect waves-light btn"
           type="submit"

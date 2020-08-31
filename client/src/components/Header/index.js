@@ -13,8 +13,14 @@ const api = axios.create({ baseURL: "api" });
 const btnClasses = `waves-effect waves-light btn ${css.button}`;
 
 const customStyles = {
-  overlay: { zIndex: 1000 },
-};
+  overlay: {
+    zIndex: 1000,
+  },
+  content: {
+    maxHeight: "425px",
+    maxWidth: "450px",
+    margin: "0 auto",
+  }};
 
 export default function Header({
   currentPeriod,

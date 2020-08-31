@@ -9,10 +9,23 @@
 }
 
 .radioInput {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .radioOption {
-    margin: 40px;
+  margin: 40px;
+}
+
+.lastLine {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date {
+  max-width: 150px;
+}
+
+.value {
+  margin-right: 10px !important;
 }

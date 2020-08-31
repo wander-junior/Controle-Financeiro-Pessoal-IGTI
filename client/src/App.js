@@ -3,18 +3,26 @@ import axios from "axios";
 import Modal from "react-modal";
 
 import PERIODS from "./helpers/periods";
+
 import Transactions from "./components/Transactions/Transactions";
 import Header from "./components/Header";
+import ModalForm from "./components/ModalForm";
 
 import M from "materialize-css";
-import ModalForm from "./components/ModalForm";
 
 const api = axios.create({ baseURL: "api" });
 
 Modal.setAppElement("#root");
 
 const customStyles = {
-  overlay: { zIndex: 1000 },
+  overlay: {
+    zIndex: 1000,
+  },
+  content: {
+    maxHeight: "425px",
+    maxWidth: "450px",
+    margin: "auto",
+  }
 };
 
 export default function App() {
