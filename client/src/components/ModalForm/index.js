@@ -6,10 +6,12 @@ export default function ModalForm({
   closeModal,
   transaction,
   modalType,
-  handleEdit,
+  handleTransaction,
 }) {
   const [type, setType] = React.useState(transaction.type);
   const [sendTransaction, setSendTransaction] = React.useState(transaction);
+
+  const title = (modalType === 'edit') ? "Edição de lançamento" : "Inclusão de lançamento"
 
   const handleTypeChange = (event) => {
     if (modalType === "edit") {
@@ -54,15 +56,15 @@ export default function ModalForm({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (modalType === "edit") {
-      handleEdit(sendTransaction);
-    }
+    handleTransaction(sendTransaction);
+    closeModal();
+    
   };
 
   return (
     <div className={css.container}>
       <div className={css.header}>
-        <h4>Edição de lançamento</h4>
+        <h4>{title}</h4>
         <button
           className="waves-effect waves-light red btn"
           onClick={closeModal}
@@ -79,7 +81,7 @@ export default function ModalForm({
                 name="expense"
                 value="-"
                 checked={type === "-"}
-                onSelect={handleTypeChange}
+                onChange={handleTypeChange}
                 className={css.radioOption}
               />
               <span>Despesa</span>
@@ -90,7 +92,7 @@ export default function ModalForm({
                 name="expense"
                 value="+"
                 checked={type === "+"}
-                onSelect={handleTypeChange}
+                onChange={handleTypeChange}
                 className={css.radioOption}
               />
               <span>Receita</span>

@@ -1,0 +1,10 @@
+.filterContainer {
+    display: flex;
+}
+
+.button {
+    text-align: left;
+    min-width: 195px;
+    margin-top: 10px;
+    margin-right: 10px;
+}

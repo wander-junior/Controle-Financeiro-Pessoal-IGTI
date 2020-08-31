@@ -11,6 +11,8 @@ import ModalForm from "./components/ModalForm";
 
 const api = axios.create({ baseURL: "api" });
 
+Modal.setAppElement("#root");
+
 const customStyles = {
   overlay: { zIndex: 1000 },
 };
@@ -89,7 +91,9 @@ export default function App() {
         console.log(data);
       })
       .catch((error) => {
-        alert(`Não foi possível alterar essa transação. Erro: ${error.message}`);
+        alert(
+          `Não foi possível alterar essa transação. Erro: ${error.message}`
+        );
       });
   };
 
@@ -134,7 +138,7 @@ export default function App() {
           transaction={tmpTransaction}
           closeModal={closeModal}
           modalType="edit"
-          handleEdit={handleEdit}
+          handleTransaction={handleEdit}
         />
       </Modal>
     </div>
