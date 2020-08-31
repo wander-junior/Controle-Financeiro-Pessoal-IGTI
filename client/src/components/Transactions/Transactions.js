@@ -6,7 +6,7 @@ import css from "./style.module.css";
 export default function Transactions({
   transactions,
   handleDelete,
-  handleEdit,
+  handleOpenModalEdit,
 }) {
   return (
     <ul>
@@ -17,7 +17,7 @@ export default function Transactions({
               <Transaction
                 transaction={transaction}
                 handleDelete={handleDelete}
-                handleEdit={handleEdit}
+                handleOpenModalEdit={handleOpenModalEdit}
                 id={transaction._id}
               />
             </li>
@@ -28,7 +28,7 @@ export default function Transactions({
               <Transaction
                 transaction={transaction}
                 handleDelete={handleDelete}
-                handleEdit={handleEdit}
+                handleOpenModalEdit={handleOpenModalEdit}
                 id={transaction._id}
               />
             </li>

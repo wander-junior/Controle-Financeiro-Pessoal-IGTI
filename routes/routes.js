@@ -58,11 +58,11 @@ transactionRouter.delete('/:id', async (req, res) => {
   }
 });
 
-transactionRouter.patch('/:id', async (req, res) => {
+transactionRouter.put('/:id', async (req, res) => {
   try {
     const transaction = await transactionModule.findOneAndUpdate(
       { _id: req.params.id },
-      req.body,
+      req.body.data,
       { new: true }
     );
 

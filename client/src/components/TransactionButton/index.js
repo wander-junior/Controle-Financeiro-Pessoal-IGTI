@@ -1,18 +1,18 @@
 import React from "react";
 
-export default function TransactionButton({ type, id, handleDelete, handleEdit }) {
+export default function TransactionButton({ btnType, transaction, id, handleDelete, handleOpenModalEdit }) {
   const handleButtonClick = (event) => {
     if (event.target.innerText === "delete") {
       handleDelete(id);
       return;
     }
-    handleEdit();
+    handleOpenModalEdit(id, transaction);
 
   };
   return (
     <>
       <i className="material-icons" onClick={handleButtonClick}>
-        {type}
+        {btnType}
       </i>
     </>
   );

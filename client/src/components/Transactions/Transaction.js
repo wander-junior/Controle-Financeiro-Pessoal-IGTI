@@ -6,7 +6,7 @@ import TransactionButton from "../TransactionButton";
 export default function Transaction({
   transaction,
   handleDelete,
-  handleEdit,
+  handleOpenModalEdit,
   id,
 }) {
   return (
@@ -20,17 +20,19 @@ export default function Transaction({
         <span className={css.value}> R${transaction.value}</span>
         <div className={css.buttons}>
           <TransactionButton
-            type="edit"
+            btnType="edit"
+            transaction={transaction}
             id={id}
             handleDelete={handleDelete}
-            handleEdit={handleEdit}
+            handleOpenModalEdit={handleOpenModalEdit}
             href="#modal"
           />
           <TransactionButton
-            type="delete"
+            btnType="delete"
+            transaction={transaction}
             id={id}
             handleDelete={handleDelete}
-            handleEdit={handleEdit}
+            handleOpenModalEdit={handleOpenModalEdit}
           />
         </div>
       </div>

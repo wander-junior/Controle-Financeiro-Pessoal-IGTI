@@ -7,7 +7,7 @@ import Transactions from "./components/Transactions/Transactions";
 import Header from "./components/Header";
 
 import M from "materialize-css";
-import EditModal from "./components/EditModal";
+import ModalForm from "./components/ModalForm";
 
 const api = axios.create({ baseURL: "api" });
 
@@ -24,6 +24,8 @@ export default function App() {
   const [transactions, setTransactions] = React.useState([]);
   const [forceRender, setForceRender] = React.useState(true);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [modalId, setModalId] = React.useState("");
+  const [tmpTransaction, setTmpTransaction] = React.useState({});
 
   React.useEffect(() => {
     const fetchPeriods = async () => {
@@ -77,7 +79,24 @@ export default function App() {
     }
   };
 
-  const handleEdit = () => {
+  const handleEdit = async (data) => {
+    const url = `transaction/${data._id}`;
+    await api
+      .put(url, { data })
+      .then(() => {
+        setForceRender(!forceRender);
+        console.log(url);
+        console.log(data);
+      })
+      .catch((error) => {
+        alert(`Não foi possível alterar essa transação. Erro: ${error.message}`);
+      });
+  };
+
+  const handleOpenModalEdit = (id, transaction) => {
+    setModalId(id);
+    const transactionCopy = Object.assign({}, transaction);
+    setTmpTransaction(transactionCopy);
     setIsModalOpen(true);
   };
 
@@ -103,14 +122,20 @@ export default function App() {
       <Transactions
         transactions={transactions}
         handleDelete={handleDelete}
-        handleEdit={handleEdit}
+        handleOpenModalEdit={handleOpenModalEdit}
       />
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <EditModal closeModal={closeModal}/>
+        <ModalForm
+          modalId={modalId}
+          transaction={tmpTransaction}
+          closeModal={closeModal}
+          modalType="edit"
+          handleEdit={handleEdit}
+        />
       </Modal>
     </div>
   );
