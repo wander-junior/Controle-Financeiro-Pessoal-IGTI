@@ -28,10 +28,13 @@ const customStyles = {
 const today = new Date();
 const month = String(today.getMonth() + 1).padStart(2, "0");
 const year = today.getFullYear();
-
 const yearMonth = `${year}-${month}`;
-
 const startPeriod = PERIODS.findIndex((period) => period === yearMonth);
+
+const compare = (a, b) => {
+  return a.day - b.day;
+}
+
 
 export default function App() {
   const [currentPeriod, setCurrentPeriod] = React.useState(PERIODS[startPeriod]);
@@ -67,10 +70,11 @@ export default function App() {
           localExpense += transaction.value;
         }
       });
+      const sortedTransaction = transactionsFiltered.sort(compare);
       setBalance(total);
       setIncome(localIncome);
       setExpense(localExpense);
-      setTransactions(transactionsFiltered);
+      setTransactions(sortedTransaction);
     };
     fetchPeriods();
   }, [currentPeriod, textFilter, forceRender]);
