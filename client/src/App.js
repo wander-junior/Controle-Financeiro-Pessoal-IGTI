@@ -22,11 +22,19 @@ const customStyles = {
     maxHeight: "425px",
     maxWidth: "450px",
     margin: "auto",
-  }
+  },
 };
 
+const today = new Date();
+const month = String(today.getMonth() + 1).padStart(2, "0");
+const year = today.getFullYear();
+
+const yearMonth = `${year}-${month}`;
+
+const startPeriod = PERIODS.findIndex((period) => period === yearMonth);
+
 export default function App() {
-  const [currentPeriod, setCurrentPeriod] = React.useState(PERIODS[0]);
+  const [currentPeriod, setCurrentPeriod] = React.useState(PERIODS[startPeriod]);
   const [textFilter, setTextFilter] = React.useState("");
   const [balance, setBalance] = React.useState(0);
   const [income, setIncome] = React.useState(0);
@@ -67,8 +75,13 @@ export default function App() {
     fetchPeriods();
   }, [currentPeriod, textFilter, forceRender]);
 
+  const handleForceRender = () => {
+    setForceRender(!forceRender)
+  }
+
   const handleSelectChange = (event) => {
-    setCurrentPeriod(event.target.value);
+    const newPeriod = event.option;
+    setCurrentPeriod(newPeriod);
   };
 
   const handleFilterChange = (event) => {
@@ -124,12 +137,14 @@ export default function App() {
     <div className="container">
       <Header
         currentPeriod={currentPeriod}
+        setCurrentPeriod={setCurrentPeriod}
         handleSelect={handleSelectChange}
         handleFilter={handleFilterChange}
         entries={transactions.length}
         income={income}
         expense={expense}
         balance={balance}
+        handleForceRender={handleForceRender}
       />
       <Transactions
         transactions={transactions}

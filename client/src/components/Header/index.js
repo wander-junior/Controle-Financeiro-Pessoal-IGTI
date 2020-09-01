@@ -7,6 +7,7 @@ import TextFilter from "../TextFilter";
 import Info from "../Info";
 import css from "./style.module.css";
 import ModalForm from "../ModalForm";
+import PeriodButton from "../PeriodButton";
 
 const api = axios.create({ baseURL: "api" });
 
@@ -20,16 +21,19 @@ const customStyles = {
     maxHeight: "425px",
     maxWidth: "450px",
     margin: "0 auto",
-  }};
+  },
+};
 
 export default function Header({
   currentPeriod,
+  setCurrentPeriod,
   handleSelect,
   handleFilter,
   entries,
   income,
   expense,
   balance,
+  handleForceRender
 }) {
   const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
 
@@ -62,8 +66,9 @@ export default function Header({
     await api
       .post(url, data)
       .then((response) => {
-        console.log(response)
+        console.log(response);
         closeModal();
+        handleForceRender();
       })
       .catch((error) => {
         alert(
@@ -76,10 +81,23 @@ export default function Header({
     <div>
       <h1 className="center">Bootcamp Full Stack - Desafio Final</h1>
       <h2 className="center">Controle Financeiro Pessoal</h2>
-      <DataSelection
-        currentPeriod={currentPeriod}
-        handleSelect={handleSelect}
-      />
+      <div className={css.periodSelection}>
+        <PeriodButton
+          ButtonType="<"
+          currentPeriod={currentPeriod}
+          setCurrentPeriod={setCurrentPeriod}
+        />
+        <DataSelection
+          currentPeriod={currentPeriod}
+          handleSelect={handleSelect}
+        />
+        <PeriodButton
+          ButtonType=">"
+          currentPeriod={currentPeriod}
+          setCurrentPeriod={setCurrentPeriod}
+        />
+      </div>
+
       <Info
         entries={entries}
         income={income}
